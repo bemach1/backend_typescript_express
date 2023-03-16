@@ -1,0 +1,16 @@
+{
+  "name": "typests",
+  "version": "1.0.0",
+  "description": "Explicando os tipos no TS",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./dist/index"
+  },
+  "keywords": [
+    "typescript",
+    "types",
+    "examples"
+  ],
+  "author": "Cleyton Oliveira",
+  "license": "ISC"
+}
