@@ -1,0 +1,27 @@
+{
+  "name": "praticeexpress",
+  "version": "1.0.0",
+  "description": "Projeto de pratica express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node --transpile-only src/server.ts"
+  },
+  "keywords": [
+    "typescript",
+    "javascript",
+    "npm",
+    "nodejs",
+    "express"
+  ],
+  "author": "Turma de backend",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.18.2",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "ts-node-dev": "^2.0.0"
+  }
+}
