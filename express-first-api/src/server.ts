@@ -2,11 +2,12 @@ import express from 'express';
 import { Router, Request, Response } from 'express';
 import {IStudent} from './interfaces/student';
 import getLastId from './utils/getLastId';
+import dados from "../student.json";
 
 
-const students: IStudent[] = [
-    { "id": 100, "name": "Cleyton", "age": 32, "cpf": "12345678912" }
-];
+const students: IStudent[] = dados;
+const fs = require('fs');
+
 
 enum messages {
     studentNotFind = 'Estudante não encontrado',
@@ -54,6 +55,9 @@ route.post('/studentRegister', (req: Request, res: Response) => {
         let lastID = getLastId(students);
         let student = handleBodyRegister(req.body, lastID);
         students.push(student);
+        const studentJson = JSON.stringify(students);
+        console.log(studentJson)
+        fs.writeFileSync("../student.json", studentJson);
         res.json({ message: messages.studentRegisterSuccess });
 
     } else {
@@ -71,4 +75,4 @@ route.post('/studentRegister', (req: Request, res: Response) => {
 // Setando uso da rota ou das rotas
 app.use(route);
 // Startando o servidor
-app.listen(8080, () => 'server running port 8080');
+app.listen(3000, () => 'server running port 8080');
