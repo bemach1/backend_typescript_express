@@ -1,13 +1,12 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
-import {IStudent} from './interfaces/student';
-import { IStudents } from './interfaces/interfaces';
-import getLastId from './utils/getLastID';
+import { IStudent } from './interfaces/student';
+import getLastId from './utils/getLastId';
 import messages from './enums/messages'
 
 const fs = require('fs');
-const data  = require ('../database/students.json');
-const students: IStudents[] = data;
+const data = require('../database/students.json');
+const students: IStudent[] = data;
 const app = express();
 const route = Router();
 
@@ -20,7 +19,6 @@ function handleBodyRegister(returnAPI: any, idStudent: number): IStudent {
     }
     return newStudent;
 }
-
 
 app.use(express.json());
 // Rota onde a minha API vai responder
@@ -64,13 +62,6 @@ route.post('/studentRegister', (req: Request, res: Response) => {
             }
         });
     }
-    // let student = req.body;
-    // let lastID = getLastId(students) + 1;
-    // student.id = lastID;
-    // students.push(student);
-    // res.json({ message: messages.studentRegistrerSuccess });
-    // fs.writeFileSync("./database/students.json", JSON.stringify(students));
-  
 })
 
 // Setando uso da rota ou das rotas
