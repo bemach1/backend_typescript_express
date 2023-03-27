@@ -64,6 +64,56 @@ route.post('/studentRegister', (req: Request, res: Response) => {
     }
 })
 
+// Criando uma rota PUT para atualizar um registro no banco
+route.put('/studentUpdate/:id', (req: Request, res: Response) => {
+    let id = Number(req.params.id);
+    // Verificar se passou um ID na Rota
+    let resultStudent = students.find(item => item.id === id);
+    let indexObject = students.findIndex(item => item.id === id);
+
+    if (resultStudent) {
+        // Validar dados que foram enviados no body
+        if (req.body.name || req.body.age || req.body.cpf) {
+            // ATUALIZANDO O OBJETO
+            // Name
+            students[indexObject].name = req.body.name ? req.body.name :
+                students[indexObject].name;
+
+            // Age
+            students[indexObject].age = req.body.age ? req.body.age :
+                students[indexObject].age;
+
+            // CPF
+            students[indexObject].cpf = req.body.cpf ? req.body.cpf :
+                students[indexObject].cpf;
+            const studentJson = JSON.stringify(students);
+            res.json({
+                message: messages.studentRegistrerSuccess
+            });
+            fs.writeFileSync("./database/students.json", studentJson);
+        } else {
+            res.json({
+                message: messages.studentNotSet,
+                bodyExpected: {
+                    name: 'string',
+                    age: 'number',
+                    cpf: 'string'
+                }
+            });
+        }
+    } else {
+        res.json({
+            message: messages.studentNotSet,
+            bodyExpected: {
+                name: 'string',
+                age: 'number',
+                cpf: 'string'
+            }
+        });
+    }
+
+});
+
 // Setando uso da rota ou das rotas
 app.use(route);
 // Startando o servidor
