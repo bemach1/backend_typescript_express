@@ -1,19 +1,15 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import {IStudent} from './interfaces/student';
-import getLastId from './utils/getLastId';
-import dados from "../student.json";
+import { IStudents } from './interfaces/interfaces';
+import getLastId from './utils/getLastID';
+import messages from './enums/messages'
 
-
-const students: IStudent[] = dados;
 const fs = require('fs');
-
-
-enum messages {
-    studentNotFind = 'Estudante não encontrado',
-    studentNotSet = 'Estudante não cadastrado',
-    studentRegisterSuccess = 'Estudante cadastrado com sucesso'
-}
+const data  = require ('../database/students.json');
+const students: IStudents[] = data;
+const app = express();
+const route = Router();
 
 function handleBodyRegister(returnAPI: any, idStudent: number): IStudent {
     const newStudent = {
@@ -25,8 +21,7 @@ function handleBodyRegister(returnAPI: any, idStudent: number): IStudent {
     return newStudent;
 }
 
-const app = express();
-const route = Router();
+
 app.use(express.json());
 // Rota onde a minha API vai responder
 route.get('/', (req: Request, res: Response) => {
@@ -56,9 +51,8 @@ route.post('/studentRegister', (req: Request, res: Response) => {
         let student = handleBodyRegister(req.body, lastID);
         students.push(student);
         const studentJson = JSON.stringify(students);
-        console.log(studentJson)
-        fs.writeFileSync("../student.json", studentJson);
-        res.json({ message: messages.studentRegisterSuccess });
+        fs.writeFileSync("./database/students.json", studentJson);
+        res.json({ message: messages.studentRegistrerSuccess });
 
     } else {
         res.json({
@@ -70,6 +64,13 @@ route.post('/studentRegister', (req: Request, res: Response) => {
             }
         });
     }
+    // let student = req.body;
+    // let lastID = getLastId(students) + 1;
+    // student.id = lastID;
+    // students.push(student);
+    // res.json({ message: messages.studentRegistrerSuccess });
+    // fs.writeFileSync("./database/students.json", JSON.stringify(students));
+  
 })
 
 // Setando uso da rota ou das rotas
