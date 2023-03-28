@@ -49,8 +49,8 @@ route.post('/studentRegister', (req: Request, res: Response) => {
         let student = handleBodyRegister(req.body, lastID);
         students.push(student);
         const studentJson = JSON.stringify(students);
-        fs.writeFileSync("./database/students.json", studentJson);
         res.json({ message: messages.studentRegistrerSuccess });
+        fs.writeFileSync("./database/students.json", studentJson);
 
     } else {
         res.json({
@@ -111,8 +111,30 @@ route.put('/studentUpdate/:id', (req: Request, res: Response) => {
             }
         });
     }
-
 });
+
+// DELETE remover estudante
+route.delete('/studentDelete/:id', (req: Request, res: Response) => {
+    let id = Number(req.params.id);
+    // Verifico se passou um ID que realmente existe no JSON
+    let verifyID = students.find(item => item.id === id);
+    if (verifyID){
+        // Filtra para gerar um novo array sem o registro setado
+        let studentObject = students.filter(item => item.id !== id);
+
+        const studentJson = JSON.stringify(studentObject);
+        res.json({
+            message: messages.studentRegisterRemove
+        });
+        fs.writeFileSync("./database/students.json", studentJson);
+    } else{
+        res.json({
+            message: messages.studentNotFind
+        });
+    }
+
+
+})
 
 // Setando uso da rota ou das rotas
 app.use(route);
