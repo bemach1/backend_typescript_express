@@ -3,6 +3,7 @@ import { Router, Request, Response } from 'express';
 import { IStudent } from './interfaces/student';
 import getLastId from './utils/getLastId';
 import messages from './enums/messages'
+import findUser from './utils/findUser';
 
 const fs = require('fs');
 const data = require('../database/students.json');
@@ -34,7 +35,7 @@ route.get('/studentList', (req: Request, res: Response) => {
 // Retornar um estudante específico através do ID
 route.get('/student/:id', (req: Request, res: Response) => {
     let id = Number(req.params.id);
-    let student: any = students.find(item => item.id == id);
+    let student=  findUser(students, id)
     if (student) {
         res.json(student);
     } else {
