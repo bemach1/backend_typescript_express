@@ -1,9 +1,9 @@
 import express from "express";
 import { Router, Request, Response } from "express";
 import { IStudent } from "./interfaces/student";
-import getLastId from "./utils/utilgetLastid";
-import messages from "./enums/messages";
 import saveDataInJson from "./utils/saveDataInJson";
+import messages from "./enums/messages";
+import getLastid from "./utils/utilLastid";
 
 const data = require("../database/students.json");
 const students: IStudent[] = data;
@@ -77,7 +77,7 @@ route.post("/studentRegister", (req: Request, res: Response) => {
   const validBody = verifyBody(body);
   // Como valido o Body enviado?
   if (validBody.isValid) {
-    let lastID = getLastId(students);
+    let lastID = getLastid(students);
     let student = handleBodyRegister(body, lastID);
     students.push(student);
     const studentJson = JSON.stringify(students);
