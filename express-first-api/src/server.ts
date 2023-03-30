@@ -37,7 +37,7 @@ route.get('/student/:id', (req: Request, res: Response) => {
     let id = Number(req.params.id);
     let student=  findUser(students, id)
     if (student) {
-        res.json(students);
+        res.json(student);
     } else {
         res.json({ message: messages.studentNotFind });
     }

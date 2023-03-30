@@ -1,7 +1,8 @@
-function findUser(students:any[], id:Number):boolean {
+import { IStudent } from "../interfaces/student"
+function findUser(students:IStudent[], id:Number) {
     let student = students.find(item => item.id == id)
     if(student) {
-        return true
+        return student
     }
     return false
 }
