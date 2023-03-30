@@ -1,17 +1,1 @@
-<<<<<<< HEAD
 [{"id":101,"name":"Fabio","age":27,"cpf":"131654646689"},{"id":102,"name":"Fabio","age":27,"cpf":"131654646689"},{"id":103,"name":"Geovana","age":26,"cpf":"89249872842"}]
-=======
-[
-  { "id": 101, "name": "Fabio", "age": 27, "cpf": "131654646689" },
-  { "id": 102, "name": "Fabio", "age": 27, "cpf": "131654646689" },
-  { "id": 103, "name": "Geovana", "age": 25, "cpf": "12245678891" },
-  { "id": 104, "name": "Teste", "age": 28, "cpf": "123" },
-  { "id": 105, "name": "Ivan", "age": 28, "cpf": "123" },
-  { "id": 106, "name": "Jéssica", "age": 28, "cpf": "123" },
-  { "id": 107, "name": "Teste", "age": 28, "cpf": "123" },
-  { "id": 108, "name": "Teste", "age": 28 },
-  { "id": 109, "name": "Teste", "age": 28, "cpf": "12345678998" },
-  { "id": 110, "name": "Teste", "age": 28, "cpf": "12345678998" },
-  { "id": 111, "name": "Geovana", "age": 28, "cpf": "12345678998" }
-]
->>>>>>> faa748e (Função que verifica o corpo que é passado no método put)
