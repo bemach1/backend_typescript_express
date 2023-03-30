@@ -4,8 +4,9 @@ import { IStudent } from './interfaces/student';
 import getLastId from './utils/getLastId';
 import messages from './enums/messages'
 import saveDataInJson from './utils/saveDataInJson';
+import createDataInJson from './utils/createFile';
 
-const data = require('../database/students.json');
+const data = createDataInJson([{}])
 const students: IStudent[] = data;
 const app = express();
 const route = Router();
@@ -45,7 +46,7 @@ route.get('/student/:id', (req: Request, res: Response) => {
 route.post('/studentRegister', (req: Request, res: Response) => {
     // Como valido o Body enviado?
     if (req.body.name && req.body.age && req.body.cpf) {
-        let lastID = getLastId(students);
+        let lastID = getLastId(students)
         let student = handleBodyRegister(req.body, lastID);
         students.push(student);
         res.json({ message: messages.studentRegistrerSuccess });
