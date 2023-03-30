@@ -6,7 +6,8 @@ import saveDataInJson from './utils/saveDataInJson';
 import createDataInJson from './utils/createFile';
 import getLastId from './utils/utilgetLastid';
 
-const data = createDataInJson([{}])
+const data = createDataInJson([])
+console.log(data)
 const students: IStudent[] = data;
 const app = express();
 const route = Router();
@@ -78,7 +79,7 @@ route.post("/studentRegister", (req: Request, res: Response) => {
   const validBody = verifyBody(body);
   // Como valido o Body enviado?
   if (validBody.isValid) {
-    let lastID = getLastId(students);
+    let lastID = getLastId(students) ? getLastId(students) : 1
     let student = handleBodyRegister(body, lastID);
     students.push(student);
     const studentJson = JSON.stringify(students);
