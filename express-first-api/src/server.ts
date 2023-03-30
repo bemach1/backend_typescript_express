@@ -1,7 +1,7 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import { IStudent } from './interfaces/student';
-import getLastId from './utils/getLastId';
+import getLastId from './utils/getLastID';
 import messages from './enums/messages'
 import findUser from './utils/findUser';
 
