@@ -21,6 +21,22 @@ function handleBodyRegister(returnAPI: any, idStudent: number): IStudent {
   return newStudent;
 }
 
+// Função para criar mensagens em json como resposta para as rotas
+function jsonMessageBodyExample(enumMessage: string) {
+
+  let messageCreated
+
+  return messageCreated = {
+    message: enumMessage,
+    bodyExpected: {
+      name: 'string',
+      age: 'number',
+      cpf: 'string'
+    }
+  }
+
+}
+
 function verifyBody(body: any): { isValid: boolean; message: string } {
   if (!body) {
     return { isValid: false, message: "Corpo inválido" };
@@ -85,6 +101,7 @@ route.post("/studentRegister", (req: Request, res: Response) => {
     res.json({ message: messages.studentRegistrerSuccess });
     saveDataInJson(students);
   } else {
+
     res.json({
       message: messages.studentNotSet,
     });
@@ -106,16 +123,11 @@ route.put("/studentUpdate/:id", (req: Request, res: Response) => {
       (field) => !allowedFields.includes(field)
     );
     if (invalidFields.length > 0) {
-      res.send({
-        message: messages.studentNotUpdated,
-        bodyExpected: {
-          name: "string",
-          age: "number",
-          cpf: "string",
-        },
-      });
-      return;
+
+      res.json({ message: jsonMessageBodyExample(messages.studentNotUpdated) })
+
     }
+
     const updatedUser = {
       ...students[indexObject],
       ...body,
