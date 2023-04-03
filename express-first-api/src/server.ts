@@ -1,12 +1,14 @@
-import express from "express";
-import { Router, Request, Response } from "express";
-import { IStudent } from "./interfaces/student";
-import saveDataInJson from "./utils/saveDataInJson";
-import messages from "./enums/messages";
-import getLastid from "./utils/utilLastid";
-import findUser from "./utils/findUser";
+import express from 'express';
+import { Router, Request, Response } from 'express';
+import { IStudent } from './interfaces/student';
+import messages from './enums/messages'
+import saveDataInJson from './utils/saveDataInJson';
+import createDataInJson from './utils/createFile';
+import getLastId from './utils/utilgetLastid';
+import findUser from './utils/findUser';
 
-const data = require("../database/students.json");
+const data = createDataInJson([])
+console.log(data)
 const students: IStudent[] = data;
 const app = express();
 const route = Router();
@@ -78,7 +80,7 @@ route.post("/studentRegister", (req: Request, res: Response) => {
   const validBody = verifyBody(body);
   // Como valido o Body enviado?
   if (validBody.isValid) {
-    let lastID = getLastid(students);
+    let lastID = getLastId(students) ? getLastId(students) : 1
     let student = handleBodyRegister(body, lastID);
     students.push(student);
     const studentJson = JSON.stringify(students);
