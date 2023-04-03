@@ -5,6 +5,7 @@ import messages from './enums/messages'
 import saveDataInJson from './utils/saveDataInJson';
 import createDataInJson from './utils/createFile';
 import getLastId from './utils/utilgetLastid';
+import findUser from './utils/findUser';
 
 const data = createDataInJson([])
 console.log(data)
@@ -64,15 +65,15 @@ route.get("/studentList", (req: Request, res: Response) => {
 });
 
 // Retornar um estudante específico através do ID
-route.get("/student/:id", (req: Request, res: Response) => {
-  let id = Number(req.params.id);
-  let student: any = students.find((item) => item.id == id);
-  if (student) {
-    res.json(student);
-  } else {
-    res.json({ message: messages.studentNotFind });
-  }
-});
+route.get('/student/:id', (req: Request, res: Response) => {
+    let id = Number(req.params.id);
+    let student=  findUser(students, id)
+    if (student) {
+        res.json(student);
+    } else {
+        res.json({ message: messages.studentNotFind });
+    }
+})
 
 route.post("/studentRegister", (req: Request, res: Response) => {
   const body = req.body;
